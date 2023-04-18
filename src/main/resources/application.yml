@@ -1,0 +1,20 @@
+# Server port
+server:
+  port: 8081
+# API context path.
+  servlet:
+    context-path: /api/v1
+# Spring configuration.
+spring:
+  application.name: quizo-um
+  config.activate.on-profile: default, dev, test
+  # Database configuration.
+  datasource:
+    url: ${dbUrl}
+    username: ${dbUsername}
+    password: ${dbPassword}
+    driverClassName: ${dbDriverClassName}
+  # Hibernate
+  jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: validate
