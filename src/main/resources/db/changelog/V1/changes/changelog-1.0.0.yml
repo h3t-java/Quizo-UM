@@ -1,0 +1,93 @@
+databaseChangeLog:
+  - changeSet:
+      id: createSessionTables
+      author: h3t-java
+      logicalFilePath: src/main/resources/db/changelog/V1/changes/changelog-1.0.0.yml
+      context: default
+      changes:
+        - tagDatabase:
+            tag: version_1.0.0
+        - createTable:
+            tableName: spring_session
+            columns:
+              - column:
+                  name: primary_id
+                  type: char(64)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: spring_session_pk
+              - column:
+                  name: session_id
+                  type: char(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: creation_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_access_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_inactive_interval
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiry_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: principal_name
+                  type: varchar(120)
+        - createTable:
+            tableName: spring_session_attributes
+            columns:
+              - column:
+                  name: session_primary_id
+                  type: char(64)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: spring_session_attributes_pk
+                    foreignKeyName: spring_session_attributes_fk
+                    references: spring_session(primary_id)
+                    deleteCascade: true
+              - column:
+                  name: attribute_name
+                  type: varchar(200)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: spring_session_attributes_pk
+              - column:
+                  name: attribute_bytes
+                  type: bytea
+                  constraints:
+                    nullable: false
+        - createIndex:
+            columns:
+              - column:
+                  name: session_id
+            indexName: spring_session_ix_session_id
+            schemaName: public
+            tableName: spring_session
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  name: expiry_time
+            indexName: spring_session_ix_expiry_time
+            schemaName: public
+            tableName: spring_session
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  name: principal_name
+            indexName: spring_session_ix_principal_name
+            schemaName: public
+            tableName: spring_session
+            unique: false
