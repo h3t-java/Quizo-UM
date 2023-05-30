@@ -1,0 +1,110 @@
+databaseChangeLog:
+  - changeSet:
+      id: createCountriesLanguagesAndStatusTables
+      author: h3t-java
+      logicalFilePath: src/main/resources/db/changelog/V1/changes/changelog-1.0.1.yml
+      context: default
+      changes:
+        - tagDatabase:
+            tag: version_1.0.1
+        - createTable:
+            tableName: countries
+            columns:
+              - column:
+                  name: id
+                  type: varchar(2)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: countries_pk
+              - column:
+                  name: phone_code
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: country_translations
+            columns:
+              - column:
+                  name: country_id
+                  type: varchar(2)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: cntr_transl_country_id_pk
+                    foreignKeyName: cntr_transl_country_id_fx
+                    references: countries(id)
+              - column:
+                  name: locale
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: cntr_transl_country_id_pk
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: languages
+            columns:
+              - column:
+                  name: id
+                  type: varchar(2)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: languages_pk
+        - createTable:
+            tableName: language_translations
+            columns:
+              - column:
+                  name: language_id
+                  type: varchar(2)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: lang_transl_language_id_pk
+                    foreignKeyName: lang_transl_language_id_fx
+                    references: languages(id)
+              - column:
+                  name: locale
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: lang_transl_language_id_pk
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: user_statuses
+            columns:
+              - column:
+                  name: id
+                  type: varchar(16)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_statuses_pk
+        - createTable:
+            tableName: user_status_translations
+            columns:
+              - column:
+                  name: user_status_id
+                  type: varchar(16)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: usr_st_transl_usr_status_id_pk
+                    foreignKeyName: usr_st_transl_usr_status_id_fk
+                    references: user_statuses(id)
+              - column:
+                  name: locale
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: usr_st_transl_usr_status_id_pk
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false

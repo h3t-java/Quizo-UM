@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: initDataCountriesLanguagesStatuses
+      author: h3t-java
+      logicalFilePath: src/main/resources/db/changelog/V1/changes/changelog-1.0.2.yml
+      context: default
+      changes:
+        - tagDatabase:
+            tag: version_1.0.2
+        - sqlFile:
+            path: changes/insert-countries.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+        - sqlFile:
+            path: changes/insert-languages.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+        - sqlFile:
+            path: changes/insert-user-statuses.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+        - rollback:
+            - sql:
+                sql: truncate countries cascade; truncate languages cascade; truncate user_statues cascade;
