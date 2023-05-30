@@ -8,15 +8,15 @@ databaseChangeLog:
         - tagDatabase:
             tag: version_1.0.2
         - sqlFile:
-            path: changes/insert-countries.sql
+            path: insert-countries.sql
             relativeToChangelogFile: true
             splitStatements: true
         - sqlFile:
-            path: changes/insert-languages.sql
+            path: insert-languages.sql
             relativeToChangelogFile: true
             splitStatements: true
         - sqlFile:
-            path: changes/insert-user-statuses.sql
+            path: insert-user-statuses.sql
             relativeToChangelogFile: true
             splitStatements: true
         - rollback:

@@ -16,7 +16,7 @@ spring:
     driverClassName: ${dbDriverClassName}
   # Liquibase
   liquibase:
-    change-log: classpath:/db/changelog/changelog-master.yml
+    enabled: false
   # Hibernate
   jpa:
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect

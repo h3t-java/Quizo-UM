@@ -25,15 +25,16 @@ processResources {
 	}
 }
 
-task(lb) {
+tasks.register('lb') {
 	liquibase {
 		activities {
 			main {
-				changeLogFile "${project.rootDir}/$liquibaseChangeLogFile"
+				changeLogFile "${liquibaseChangeLogFile}"
 				url "${dbUrl}"
 				username "${dbUsername}"
 				password "${dbPassword}"
 				driver "${dbDriverClassName}"
+				classpath "${rootDir}"
 			}
 			runList = project.hasProperty('runList') ? project.property('runList') : 'main'
 		}
